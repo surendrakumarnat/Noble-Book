@@ -2,143 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>work_from_home_jobs_099</title>
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script> -->
-  <link rel="stylesheet" href="style.css">
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f0f8ff;
-      margin: 10px;
-      padding: 0;
-    }
-
-    .header {
-      background: linear-gradient(135deg, #002c57, #024c7b);
-      color: white;
-      margin: 10px;
-      padding: 40px 20px;
-      text-align: center;
-      position: relative;
-    }
-
-    .header h1 {
-      margin: 0;
-      font-size: 32px;
-      color: #00e6ac;
-      font-weight: bold;
-    }
-
-    .header h2 {
-      margin: 5px 0 0;
-      font-size: 24px;
-    }
-
-    .circle {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      background: white;
-      overflow: hidden;
-      border: 5px solid #00e6ac;
-    }
-
-    .circle img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .form-container {
-      max-width: 500px;
-      background: #ffffff;
-      padding: 25px;
-      margin: -30px auto 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-    }
-
-    label {
-      display: block;
-      margin-top: 10px;
-      font-weight: bold;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      box-sizing: border-box;
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 20px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #0056b3;
-    }
-
-    /* QR Popup Style */
-    .qr-popup {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.7);
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-    }
-
-    .qr-box {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      text-align: center;
-      box-shadow: 0 0 20px rgba(0,0,0,0.4);
-    }
-
-    .qr-box canvas {
-      margin-bottom: 10px;
-    }
-
-    .close-btn {
-      background: red;
-      color: white;
-      padding: 8px 16px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-  </style>
+  <title>Work From Home Jobs</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
   <div class="header">
     <div class="circle">
-      <img src="logo.png" alt="Conference Image">
+      <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
     </div>
     <h1>✍️ Noble Book 📚</h1>
     <h2>Copy-Paste Work</h2>
   </div>
 
+  {% if thank_you %}
+    <div class="thank-you">✅ Thank you for submitting!</div>
+  {% endif %}
+
   <div class="form-container">
-    <form action="/submit" method="POST" enctype="multipart/form-data">
+    <form method="POST" enctype="multipart/form-data">
       <label for="fullname">Full Name</label>
       <input type="text" id="fullname" name="fullname" required>
 
@@ -167,34 +49,29 @@
         <option value="other">Other</option>
       </select>
 
-      <label for="idType">Select ID Type</label>
-      <select id="idType" name="idType" required>
-        <!-- <option value="">--Select--</option> -->
-        <option value="aadhar">Aadhar</option>
-      </select>
+      <label for="account">Account Number</label>
+      <input type="tel" id="account" name="account" required>
 
-      <label for="rusemPdf">Upload Aadhar/ResumePDF</label>
+      <label for="rusemPdf">Upload Aadhar</label>
       <input type="file" id="rusemPdf" name="rusemPdf" accept="application/pdf">
 
       <button type="submit">Submit</button>
     </form>
   </div>
 
-  
-<footer class="site-footer">
-  <div class="footer-container">
-    <h3 class="footer-title">Free guidance, daily work</h3>
-    <p>📍 Pan India Job Access | 💼 Verified Home Based Work</p>
-    <p>
-      <a href="tel:7976850122" class="footer-link">📞 Call Now</a>
-      |
-      <a href="https://t.me/appjobsindia" target="_blank" class="footer-link">💬Join Telegram channel</a>
-      |
-      <a href="index.html" class="footer-link">📝 Apply Now</a>
-    </p>
-    <p class="footer-copy">&copy; 2025 Free guidance, daily work. All Rights Reserved.</p>
-  </div>
-</footer>
-</body>
+  <footer class="site-footer">
+    <div class="footer-container">
+      <h3 class="footer-title">Free guidance, daily work</h3>
+      <p>📍 Pan India Job Access | 💼 Verified Home Based Work</p>
+      <p>
+        <a href="tel:7976850122" class="footer-link">📞 Call Now</a> |
+        <a href="https://t.me/appjobsindia" target="_blank" class="footer-link">💬 Join Telegram</a> |
+        <a href="/" class="footer-link">📝 Apply Now</a> |
+        <a href="/admin-login" class="footer-link">🔐 Admin Login</a>
+      </p>
+      <p class="footer-copy">&copy; 2025 Free guidance, daily work.</p>
+    </div>
+  </footer>
 
-</html> 
+</body>
+</html>
