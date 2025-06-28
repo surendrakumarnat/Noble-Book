@@ -9,8 +9,8 @@ app.secret_key = 'your_secret_key'  # Change this for your security
 UPLOAD_FOLDER = 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-ADMIN_USERNAME = 'admin'
-ADMIN_PASSWORD = '1234'  # Change this password for your security
+ADMIN_USERNAME = 'surendra'
+ADMIN_PASSWORD = '797685'  # Change this password for your security
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
