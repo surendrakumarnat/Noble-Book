@@ -35,8 +35,8 @@ def home():
         with open('submissions.csv', 'a', newline='', encoding='utf-8') as f:
             writer = csv.writer(f)
             if not file_exists:
-                writer.writerow(['Full Name', 'Age', 'Mobile', 'WhatsApp', 'Gmail', 'Education', 'bank name', 'Account', 'ifsc', 'phonepay', 'ID Type', 'PDF Filename', 'Parcel Address'])
-            writer.writerow([fullname, age, mobile, whatsapp, gmail, education, bank name, account, ifsc, phonepay, id_type, filename, Parcel Address])
+                writer.writerow(['Full Name', 'Age', 'Mobile', 'WhatsApp', 'Gmail', 'Education', 'bank_name', 'Account', 'ifsc', 'phonepay', 'ID Type', 'PDF Filename', 'Parcel_Address'])
+            writer.writerow([fullname, age, mobile, whatsapp, gmail, education, bank_name, account, ifsc, phonepay, id_type, filename, Parcel_Address])
 
         return render_template('index.html', thank_you=True)
 
