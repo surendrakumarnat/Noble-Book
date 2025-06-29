@@ -4,13 +4,13 @@ import os
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Change this for your security
+app.secret_key = 'your_secret_key'  # Change this to a strong key
 
 UPLOAD_FOLDER = 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 ADMIN_USERNAME = 'surendra'
-ADMIN_PASSWORD = '797685'  # Change this password for your security
+ADMIN_PASSWORD = '797685'
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -41,11 +41,13 @@ def home():
             if not file_exists:
                 writer.writerow([
                     'Full Name', 'Age', 'Mobile', 'WhatsApp', 'Gmail', 'Education',
-                    'Bank Name', 'Account', 'IFSC', 'PhonePe', 'ID Type', 'PDF Filename', 'Parcel Address'
+                    'Bank Name', 'Account', 'IFSC', 'PhonePay', 'ID Type',
+                    'PDF Filename', 'Parcel Address'
                 ])
             writer.writerow([
                 fullname, age, mobile, whatsapp, gmail, education,
-                bank_name, account, ifsc, phonepay, id_type, filename, parcel_address
+                bank_name, account, ifsc, phonepay, id_type,
+                filename, parcel_address
             ])
 
         return render_template('index.html', thank_you=True)
@@ -69,13 +71,11 @@ def admin_login():
 def admin_panel():
     if not session.get('admin_logged_in'):
         return redirect(url_for('admin_login'))
-
     data = []
     if os.path.exists('submissions.csv'):
         with open('submissions.csv', newline='', encoding='utf-8') as f:
             reader = csv.reader(f)
             data = list(reader)
-
     return render_template('admin_panel.html', data=data)
 
 @app.route('/logout')
@@ -84,4 +84,4 @@ def logout():
     return redirect(url_for('admin_login'))
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
