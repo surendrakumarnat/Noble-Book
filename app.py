@@ -21,10 +21,14 @@ def home():
         whatsapp = request.form.get('whatsapp')
         gmail = request.form.get('gmail')
         education = request.form.get('education')
+        bank_name = request.form.get('bank_name')
         account = request.form.get('account')
+        ifsc = request.form.get('ifsc')
+        phonepay = request.form.get('phonepay')
+        parcel_address = request.form.get('address')
         id_type = "Aadhar"
-        rusem_pdf = request.files.get('rusemPdf')
 
+        rusem_pdf = request.files.get('rusemPdf')
         filename = ''
         if rusem_pdf and rusem_pdf.filename != '':
             safe_filename = secure_filename(rusem_pdf.filename)
@@ -35,8 +39,14 @@ def home():
         with open('submissions.csv', 'a', newline='', encoding='utf-8') as f:
             writer = csv.writer(f)
             if not file_exists:
-                writer.writerow(['Full Name', 'Age', 'Mobile', 'WhatsApp', 'Gmail', 'Education', 'bank_name', 'Account', 'ifsc', 'phonepay', 'ID Type', 'PDF Filename', 'Parcel_Address'])
-            writer.writerow([fullname, age, mobile, whatsapp, gmail, education, bank_name, account, ifsc, phonepay, id_type, filename, Parcel_Address])
+                writer.writerow([
+                    'Full Name', 'Age', 'Mobile', 'WhatsApp', 'Gmail', 'Education',
+                    'Bank Name', 'Account', 'IFSC', 'PhonePe', 'ID Type', 'PDF Filename', 'Parcel Address'
+                ])
+            writer.writerow([
+                fullname, age, mobile, whatsapp, gmail, education,
+                bank_name, account, ifsc, phonepay, id_type, filename, parcel_address
+            ])
 
         return render_template('index.html', thank_you=True)
 
@@ -59,11 +69,13 @@ def admin_login():
 def admin_panel():
     if not session.get('admin_logged_in'):
         return redirect(url_for('admin_login'))
+
     data = []
     if os.path.exists('submissions.csv'):
         with open('submissions.csv', newline='', encoding='utf-8') as f:
             reader = csv.reader(f)
             data = list(reader)
+
     return render_template('admin_panel.html', data=data)
 
 @app.route('/logout')
